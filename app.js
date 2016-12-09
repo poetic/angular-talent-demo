@@ -1,5 +1,5 @@
 angular.module('angular-talent-demo', ['angular-uuid'])
-.controller('TalentFormController', ['$scope', 'TalentService', function($scope, TalentService) {
+.controller('TalentFormController', ['$scope', '$timeout', 'TalentService', function($scope, $timeout, TalentService) {
 
   $scope.talent = {};
   $scope.formData = {};
@@ -61,6 +61,10 @@ angular.module('angular-talent-demo', ['angular-uuid'])
       $scope.talent = TalentService.update($scope.talent.id, $scope.formData);
     else
       $scope.talent = TalentService.create($scope.formData);
+
+    $scope.saved = true;
+
+    $timeout(function(){ $scope.saved = false; }, 5000);
   }
 }])
 
